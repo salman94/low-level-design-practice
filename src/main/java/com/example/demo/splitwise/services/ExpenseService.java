@@ -1,6 +1,5 @@
 package com.example.demo.splitwise.services;
 
-import com.example.demo.splitwise.model.split.PercentSplit;
 import com.example.demo.splitwise.enums.ExpenseType;
 import com.example.demo.splitwise.models.User;
 import com.example.demo.splitwise.models.expenses.EqualExpense;
