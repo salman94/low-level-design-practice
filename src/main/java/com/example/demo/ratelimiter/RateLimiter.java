@@ -12,6 +12,7 @@ public class RateLimiter {
 
     public boolean isAllow(String userId) {
         Long currentTimeStamp = System.currentTimeMillis();
+
         HitCounter hitCounter = rateLimiterHitMap.get(userId);
 
         if(hitCounter == null) {
