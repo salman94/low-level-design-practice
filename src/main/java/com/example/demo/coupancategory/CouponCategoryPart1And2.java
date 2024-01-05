@@ -1,0 +1,71 @@
+package com.example.demo.coupancategory;
+
+import java.io.IOException;
+import java.util.*;
+
+public class CouponCategoryPart1And2 {
+    private static Map<String, String> categoryToCoupons;
+    private static Map<String, String> categoryToParent;
+
+    private static String findParent(String category) {
+        String parentCategory = categoryToParent.get(category);
+        if(parentCategory.equals("None")) {
+            return "None";
+        }
+        if(categoryToCoupons.containsKey(parentCategory)) {
+            return parentCategory;
+        }
+        categoryToParent.put(category, findParent(parentCategory));
+        return categoryToParent.get(category);
+    }
+
+    private static String getCoupon(String category) {
+        if(categoryToCoupons.containsKey(category)) {
+            return categoryToCoupons.get(category);
+        }
+        String parentCategory = findParent(category);
+        if(parentCategory.equals("None")) {
+            return "None";
+        }
+        return categoryToCoupons.get(parentCategory);
+    }
+
+    private static String parse(String str) {
+        return str.split(":")[1];
+    }
+
+    public static void main(String[] args) {
+        List<String[]> coupons = List.of(
+                new String[]{"CategoryName:Comforter Sets", "CouponName:Comforters Sale"},
+                new String[]{"CategoryName:Bedding", "CouponName:Savings on Bedding"},
+                new String[]{"CategoryName:Bed & Bath", "CouponName:Low price for Bed & Bath"}
+        );
+
+        List<String[]> categories = List.of(
+                new String[]{"CategoryName:Comforter Sets", "CategoryParentName:Bedding"},
+                new String[]{"CategoryName:Bedding", "CategoryParentName:Bed & Bath"},
+                new String[]{"CategoryName:Bed & Bath", "CategoryParentName:None"},
+                new String[]{"CategoryName:Soap Dispensers", "CategoryParentName:Bathroom Accessories"},
+                new String[]{"CategoryName:Bathroom Accessories", "CategoryParentName:Bed & Bath"},
+                new String[]{"CategoryName:Toy Organizers", "CategoryParentName:Baby And Kids"},
+                new String[]{"CategoryName:Baby And Kids", "CategoryParentName:None"}
+        );
+        categoryToParent = new HashMap<>();
+        categoryToCoupons = new HashMap<>();
+
+        for(var str: coupons) {
+            categoryToCoupons.put(parse(str[0]), parse(str[1]));
+        }
+        for(var str: categories) {
+            categoryToParent.put(parse(str[0]), parse(str[1]));
+        }
+
+        System.out.println("Comforter Sets => "+getCoupon("Comforter Sets"));
+        System.out.println("Bedding => "+getCoupon("Bedding"));
+        System.out.println("Bathroom Accessories => "+getCoupon("Bathroom Accessories"));
+        System.out.println("Soap Dispensers => "+getCoupon("Soap Dispensers"));
+        System.out.println("Toy Organizers => "+getCoupon("Toy Organizers"));
+    }
+
+}
+
