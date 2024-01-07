@@ -36,20 +36,25 @@ public class CouponCategoryPart1And2 {
 
     public static void main(String[] args) {
         List<String[]> coupons = List.of(
-                new String[]{"CategoryName:Comforter Sets", "CouponName:Comforters Sale"},
-                new String[]{"CategoryName:Bedding", "CouponName:Savings on Bedding"},
-                new String[]{"CategoryName:Bed & Bath", "CouponName:Low price for Bed & Bath"}
+                new String[]{"CategoryName:Comforter Sets", "CouponName:Comforters Sale", "DateModified:2020-01-01","Discount:10%"},
+                new String[]{"CategoryName:Comforter Sets", "CouponName:Cozy Comforter Coupon", "DateModified:2021-01-01","Discount:$15"},
+                new String[]{"CategoryName:Bedding", "CouponName:Best Bedding Bargains", "DateModified:2020-01-01","Discount:30%"},
+                new String[]{"CategoryName:Bedding", "CouponName:Savings on Bedding", "DateModified:2019-01-01","Discount:25%"},
+                new String[]{"CategoryName:Bed & Bath", "CouponName:Low price for Bed & Bath", "DateModified:2018-01-01","Discount:50%"},
+                new String[]{"CategoryName:Bed & Bath", "CouponName:Bed & Bath extravaganza", "DateModified:2019-01-01","Discount:20%"},
+                new String[]{"CategoryName:Bed & Bath", "CouponName:Big Savings for Bed & Bath", "DateModified:2030-01-01","Discount:75%"}
         );
 
         List<String[]> categories = List.of(
                 new String[]{"CategoryName:Comforter Sets", "CategoryParentName:Bedding"},
                 new String[]{"CategoryName:Bedding", "CategoryParentName:Bed & Bath"},
-                new String[]{"CategoryName:Bed & Bath", "CategoryParentName:None"},
+                new String[]{"CategoryName:Bed & Bath", "CategoryParentName:null"},
                 new String[]{"CategoryName:Soap Dispensers", "CategoryParentName:Bathroom Accessories"},
                 new String[]{"CategoryName:Bathroom Accessories", "CategoryParentName:Bed & Bath"},
                 new String[]{"CategoryName:Toy Organizers", "CategoryParentName:Baby And Kids"},
-                new String[]{"CategoryName:Baby And Kids", "CategoryParentName:None"}
-        );
+                new String[]{"CategoryName:Baby And Kids", "CategoryParentName:null"},
+                new String[]{"CategoryName:Best Place", "CategoryParentName:Bedding"}
+        );;
         categoryToParent = new HashMap<>();
         categoryToCoupons = new HashMap<>();
 
